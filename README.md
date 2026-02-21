@@ -1,46 +1,64 @@
-# TV Company Database — Data Modelling & SQL (Undergraduate Project)
+# TV Company Database — ERD + SQL Implementation
 
-Relational database design + SQL implementation for a **TV company** scenario:
-- store TV **series**, their **episodes**
-- store **actors** associated with a series
-- store **directors** associated with an episode
+Relational database design and SQL implementation for a **TV company** scenario:
+- TV **series** and their **episodes**
+- **actors** linked to a series
+- **directors** linked to an episode
 
-Artifacts included:
-- ERD (`docs/ERD.png`) + editable Draw.io source (`docs/ERD.drawio`)
-- Implementation screenshots from phpMyAdmin (see `outputs/screenshots/`)
-- Coursework slides (`docs/Data_modelling_and_analysis_presentation.pptx`)
-- SQL scripts (schema, sample data, queries, constraint tests)
+This project includes an ERD, a MySQL-ready schema, sample data, example queries, and constraint/data-quality checks.
 
-## Why this is portfolio-worthy
+## What’s included
+- **ERD diagram (PNG):** `docs/ERD.png`  
+- **Editable ERD (Draw.io):** `docs/ERD.drawio`
+- **SQL scripts:**
+  - `sql/schema.sql` — tables + PK/FK constraints
+  - `sql/sample_data.sql` — example inserts (optional)
+  - `sql/queries.sql` — joins + reporting queries
+  - `sql/constraint_tests.sql` — basic integrity / quality checks
+- **Execution screenshots (phpMyAdmin):** `outputs/screenshots/`
+- **Coursework slides:** `docs/Data_modelling_and_analysis_presentation.pptx`
 
-If you’re applying for football analytics roles, this is a **supporting** project:
-- shows you can **design data models** (useful for match/event/performance databases)
-- demonstrates practical **SQL joins + constraints** and basic data quality checks
+## Schema overview (high-level)
+Main entities:
+- `series` — TV series metadata (title, budget, etc.)
+- `episodes` — each episode belongs to a `series`
+- `actors` — actors linked to a `series` (with optional nickname)
+- `directors` — directors linked to an `episode` (with optional nickname)
 
-It’s not a “headline” project, but it’s solid evidence of core **SQL + data modelling** skills.
+Keys & relationships:
+- `episodes.series_id` → `series.series_id`
+- `actors.series_id` → `series.series_id`
+- `directors.episode_id` → `episodes.episode_id`
 
 ## Quick start (MySQL / phpMyAdmin)
-
-1. Create a database (e.g. `tv_series`)
-2. Run:
-   - `sql/schema.sql`
-   - `sql/sample_data.sql` (optional)
+1. Create a database (example: `tv_series`)
+2. Run in order:
+   1) `sql/schema.sql`  
+   2) `sql/sample_data.sql` *(optional)*  
 3. Try the example queries:
    - `sql/queries.sql`
-4. Optional constraint checks:
+4. Run integrity checks (optional):
    - `sql/constraint_tests.sql`
 
-## Schema overview
+## Example queries you’ll find inside
+- Join series → episodes (episode lists per series)
+- Series cast listing (actors per series)
+- Directors per episode
+- Simple reporting queries for budgets / payments
 
-Tables:
-- `series(series_id, series_title, series_budget)`
-- `episodes(episode_id, episode_title, series_id → series.series_id)`
-- `actors(actor_id, first_name, last_name, actor_nickname NULL, actor_rating, amount_of_payment, series_id → series.series_id)`
-- `directors(director_id, first_name, last_name, director_nickname NULL, amount_of_payment, episode_id → episodes.episode_id)`
+## Evidence (screenshots)
+See `outputs/screenshots/` for:
+- table creation
+- inserts
+- example query outputs
+- constraint/error demonstrations (where relevant)
 
-## Football analytics adaptation idea (optional)
+## Why this project matters
+This demonstrates:
+- ERD-driven relational modelling
+- primary/foreign keys + constraints
+- practical JOIN queries
+- basic data-quality/integrity thinking
 
-If you ever want a football-flavoured version, the same modelling patterns map nicely to:
-- `matches`, `teams`, `players`
-- `events` (shots, passes) referencing `match_id` + `player_id`
-- `lineups` / `appearances`
+## Optional: football analytics adaptation (1-liner)
+The same modelling patterns map cleanly to football databases (matches/teams/players/events/lineups).
