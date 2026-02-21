@@ -59,6 +59,3 @@ This demonstrates:
 - primary/foreign keys + constraints
 - practical JOIN queries
 - basic data-quality/integrity thinking
-
-## Optional: football analytics adaptation (1-liner)
-The same modelling patterns map cleanly to football databases (matches/teams/players/events/lineups).
